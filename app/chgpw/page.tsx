@@ -1,4 +1,4 @@
-import HeaderLogo from '@/components/headerlogo/headerLogo'
+import HeaderLogo from '@/components/mainLogo/mainLogo'
 import ChgPwForm from '@/components/pages/chgpw/chgPwForm'
 import React from 'react'
 

@@ -1,4 +1,4 @@
-import HeaderLogo from '@/components/headerlogo/headerLogo';
+import MainLogo from '@/components/mainLogo/mainLogo';
 import Link from 'next/link';
 import React from 'react';
 
@@ -6,7 +6,7 @@ function Main() {
   return (
   <div className='text-center'>
     <div className='mt-[100px]'>
-    <HeaderLogo/>
+    <MainLogo/>
     </div>
 
       <div className='flex flex-col pt-10 gap-3'>

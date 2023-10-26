@@ -1,4 +1,4 @@
-import HeaderLogo from '@/components/headerlogo/headerLogo'
+import HeaderLogo from '@/components/mainLogo/mainLogo'
 import FindIdForm from '@/components/pages/findid/findIdForm'
 
 import React from 'react'

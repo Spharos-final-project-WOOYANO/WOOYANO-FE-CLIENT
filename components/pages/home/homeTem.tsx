@@ -7,43 +7,43 @@ const menuList = [
   {
     id:1,
     contents:"회원정보 관리",
-    imageurl:"/images/icon/회원정보관리.png",
+    imageurl:"/images/icon/memberInfoManage.png",
     url:"memberinfo"
   },
   {
     id:2,
     contents:"업체정보 관리",
-    imageurl:"/images/icon/업체정보관리.png",
+    imageurl:"/images/icon/storeInfoManage.png",
     url:"storeinfo"
   },
   {
     id:3,
     contents:"리뷰 관리",
-    imageurl:"/images/icon/리뷰관리.png",
+    imageurl:"/images/icon/reviewManage.png",
     url:"reviewlist"
   },
   {
     id:4,
     contents:"작업자 관리",
-    imageurl:"/images/icon/작업자관리.png",
+    imageurl:"/images/icon/workerManage.png",
     url:"workerlist"
   },
   {
     id:5,
     contents:"예약 관리",
-    imageurl:"/images/icon/예약관리.png",
+    imageurl:"/images/icon/reservationManage.png",
     url:"reservationlist"
   },
   {
     id:6,
     contents:"정산 관리",
-    imageurl:"/images/icon/정산관리.png",
+    imageurl:"/images/icon/settleManage.png",
     url:"settlement"
   },
   {
     id:7,
     contents:"서비스 관리",
-    imageurl:"/images/icon/서비스관리.png",
+    imageurl:"/images/icon/serviceManage.png",
     url:"servicemanage"
   }
 ]

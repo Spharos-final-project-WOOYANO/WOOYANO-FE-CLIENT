@@ -1,6 +1,6 @@
 import React from 'react'
 
-import HeaderLogo from '@/components/headerlogo/headerLogo'
+import HeaderLogo from '@/components/mainLogo/mainLogo'
 import FindIdResultForm from '@/components/pages/findidresult/findIdResultForm'
 
 function FindIdResult() {
