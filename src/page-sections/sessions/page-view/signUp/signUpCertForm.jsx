@@ -73,7 +73,7 @@ export default function SignUpCertForm(props) {
           <Paragraph mt={1} mb={6} color="text.secondary">
             Welcome to Wooyano! 우야노에 오신걸 환영합니다!
           </Paragraph>
-          <div>
+          <Box>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <H6 fontSize={16} mb={1}>
@@ -115,7 +115,7 @@ export default function SignUpCertForm(props) {
               </Paragraph>
             </Grid>
             </Grid>
-          </div>
+          </Box>
         </Box>
     </>
   )

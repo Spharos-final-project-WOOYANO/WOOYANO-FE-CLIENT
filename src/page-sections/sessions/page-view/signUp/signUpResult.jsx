@@ -1,5 +1,9 @@
 'use client'
 import React, { useEffect, useState } from "react";
+import { H5, H6, Paragraph } from "components/typography"; // CUSTOM SESSIONS LAYOUT
+import { Button, Grid, Divider, TextField, Box, DialogContentText } from "@mui/material";
+
+
 
 export default function SignUpResult(props) {
   const { signUpData } = props;
@@ -29,7 +33,7 @@ export default function SignUpResult(props) {
             <div className="flex gap-6">
               <div>
                 <label>Name</label>
-                <input
+                <TextField
                   className="mt-1.5"
                   value={`${signUpData.username}`}
                   readOnly
@@ -37,7 +41,7 @@ export default function SignUpResult(props) {
               </div>
               <div>
                 <label>Phone Number</label>
-                <input
+                <TextField
                   className="mt-1.5 "
                   defaultValue={`${signUpData.phone}`}
                   readOnly
@@ -46,7 +50,7 @@ export default function SignUpResult(props) {
             </div>
             <div>
               <label>Email</label>
-              <input
+              <TextField
                 className="mt-1.5 "
                 defaultValue={`${signUpData.email}`}
                 readOnly
@@ -54,12 +58,12 @@ export default function SignUpResult(props) {
             </div>
             <div>
               <label>Address</label>
-              <input
+              <TextField
                 className="mt-1.5 "
                 defaultValue={`${signUpData.localAddress}`}
                 readOnly
               />
-              <input
+              <TextField
                 className="mt-1.5 "
                 defaultValue={`${signUpData.extraAddress}`}
                 readOnly
