@@ -18,14 +18,12 @@ const RegisterPageView = () => {
     createUserWithEmail
   } = useAuth();
   const initialValues = {
-    email: "demo@example.com",
+    email: "wooyano@example.com",
     password: "password123456",
     remember: true
   };
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Must be a valid email").max(255).required("Email is required") // password: Yup.string()
-    //   .min(6, "Password should be of minimum 6 characters length")
-    //   .required("Password is required"),
 
   });
   const {
@@ -51,17 +49,17 @@ const RegisterPageView = () => {
         <H5 fontSize={{
         sm: 30,
         xs: 25
-      }}>Sign up for 14 days free trial</H5>
+      }}>Sign up</H5>
 
         <Paragraph mt={1} mb={6} color="text.secondary">
-          No risk, no obligations, no credit-card required.
+          Welcome to Wooyano! 우야노에 오신걸 환영합니다!
         </Paragraph>
 
         <form onSubmit={handleSubmit}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <H6 fontSize={16} mb={1}>
-                Register with your email id
+                Register with your Email
               </H6>
 
               <TextField fullWidth placeholder="Enter your work email" name="email" onBlur={handleBlur} value={values.email} onChange={handleChange} helperText={touched.email && errors.email} error={Boolean(touched.email && errors.email)} />
@@ -89,7 +87,7 @@ const RegisterPageView = () => {
         borderWidth: 1
       }}>
           <Paragraph color="text.secondary" px={1}>
-            Already have an account?
+            이미 회원이신가요?
           </Paragraph>
         </Divider>
 

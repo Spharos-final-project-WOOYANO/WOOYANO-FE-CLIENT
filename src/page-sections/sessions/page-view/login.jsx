@@ -7,17 +7,15 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import * as Yup from "yup";
 import { useFormik } from "formik"; // CUSTOM DEFINED HOOK
-
 import useAuth from "hooks/useAuth"; // CUSTOM LAYOUT COMPONENT
-
 import Layout from "../Layout"; // CUSTOM COMPONENTS
-
 import { H5, H6, Paragraph } from "components/typography";
 import { FlexBetween, FlexBox, FlexRowAlign } from "components/flexbox"; // CUSTOM ICON COMPONENTS
 
-import Twitter from "icons/Twitter";
-import Facebook from "icons/Facebook";
-import GoogleIcon from "icons/GoogleIcon"; // STYLED COMPONENT
+import { useRouter, useSearchParams} from "next/navigation";
+import { signIn } from "next-auth/react";
+import Swal from "sweetalert2";
+
 
 const StyledButton = styled(ButtonBase)(({
   theme
@@ -30,23 +28,19 @@ const StyledButton = styled(ButtonBase)(({
 const LoginPageView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const {
-    signInWithEmail,
-    signInWithGoogle
-  } = useAuth();
+  const query = useSearchParams();
+  const callBackUrl = query.get("callbackUrl");
+  const router = useRouter();
 
-  const handleGoogle = async () => {
-    await signInWithGoogle();
-  };
 
   const initialValues = {
-    email: "jason@ui-lib.com",
-    password: "dummyPass",
+    email: "",
+    password: "",
     remember: true
   };
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Must be a valid email").max(255).required("Email is required"),
-    password: Yup.string().min(6, "Password should be of minimum 6 characters length").required("Password is required")
+    email: Yup.string().email("올바른 이메일 형식이 아닙니다.").max(255).required("이메일을 입력해주세요."),
+    password: Yup.string().required("비밀번호를 입력해주세요.")
   });
   const {
     errors,
@@ -59,9 +53,44 @@ const LoginPageView = () => {
     initialValues,
     validationSchema,
     onSubmit: async values => {
+      console.log("values",values)
       try {
         setIsLoading(true);
-        await signInWithEmail(values.email, values.password);
+        const result = await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          redirect: false,
+          callbackUrl: callBackUrl ? callBackUrl : "/",
+        });
+        if (!result || !result.ok) {
+          setIsLoading(false);
+          Swal.fire({
+            text: `아이디 비밀번호 확인 후 다시 시도해주세요.`,
+            toast: false,
+            position: "center",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: false,
+            customClass: {
+              container: "my-swal",
+              popup: 'my-swal-position'
+            },
+            });
+        } else {
+          Swal.fire({
+            text: `우야노에 오신걸 환영합니다!`,
+            toast: false,
+            position: "center",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: false,
+            customClass: {
+              container: "my-swal",
+              popup: 'my-swal-position'
+            },
+          });
+          router.push("/")
+        }
       } catch (error) {
         setIsLoading(false);
         console.log(error);
@@ -76,9 +105,9 @@ const LoginPageView = () => {
       }}>Sign In</H5>
 
         <Paragraph mt={1} mb={6} color="text.secondary">
-          New user?{" "}
+          첫 방문이신가요?{" "}
           <Box fontWeight={500} component={Link} href="/register">
-            Create an Account
+            <strong>회원가입 하기</strong>
           </Box>
         </Paragraph>
 
@@ -86,13 +115,14 @@ const LoginPageView = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <H6 fontSize={16} mb={1.5}>
-                Login with your email id
+                Login with your Email
               </H6>
-
-              <TextField fullWidth placeholder="Enter your work email" name="email" onBlur={handleBlur} value={values.email} onChange={handleChange} helperText={touched.email && errors.email} error={Boolean(touched.email && errors.email)} />
+              <label htmlFor="password" a>Email:</label>
+              <TextField fullWidth placeholder="wooyano@example.com" name="email" onBlur={handleBlur} value={values.email} onChange={handleChange} helperText={touched.email && errors.email} error={Boolean(touched.email && errors.email)} />
             </Grid>
 
             <Grid item xs={12}>
+            <label htmlFor="password">Password:</label>
               <TextField fullWidth placeholder="Password" type={showPassword ? "text" : "password"} name="password" onBlur={handleBlur} value={values.password} onChange={handleChange} helperText={touched.password && errors.password} error={Boolean(touched.password && errors.password)} InputProps={{
               endAdornment: <FlexRowAlign onClick={() => setShowPassword(!showPassword)} sx={{
                 cursor: "pointer"
@@ -125,38 +155,6 @@ const LoginPageView = () => {
             </Grid>
           </Grid>
         </form>
-
-        <Divider sx={{
-        my: 4,
-        borderColor: "grey.200",
-        borderWidth: 1
-      }}>
-          <Paragraph color="text.secondary" px={1}>
-            OR
-          </Paragraph>
-        </Divider>
-
-        <FlexBox justifyContent="center" flexWrap="wrap" gap={2}>
-          <StyledButton onClick={handleGoogle}>
-            <GoogleIcon sx={{
-            fontSize: 18
-          }} />
-          </StyledButton>
-
-          <StyledButton>
-            <Facebook sx={{
-            color: "#2475EF",
-            fontSize: 18
-          }} />
-          </StyledButton>
-
-          <StyledButton>
-            <Twitter sx={{
-            color: "#45ABF7",
-            fontSize: 18
-          }} />
-          </StyledButton>
-        </FlexBox>
       </Box>
     </Layout>;
 };

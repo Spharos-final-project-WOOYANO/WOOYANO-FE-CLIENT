@@ -31,11 +31,11 @@ const RootLayout = ({
     <body className={inter.className} suppressHydrationWarning>
       <SettingsProvider>
         <ThemeProvider>
-          <AuthProvider>
+          {/* <AuthProvider> */}
             <RTL>
               <DashboardLayout>{children}</DashboardLayout>
             </RTL>
-          </AuthProvider>
+          {/* </AuthProvider> */}
         </ThemeProvider>
       </SettingsProvider>
 
